@@ -122,6 +122,34 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+-- TERM
+vim.keymap.set('n', '<M-`>', '<cmd>split | term<CR>', { desc = 'Open terminal' })
+
+-- TABS
+vim.keymap.set('n', '<M-1>', '<cmd>tabnew<CR>', { desc = 'New tab' })
+vim.keymap.set('n', '<M-l>', '<cmd>tabnext<CR>', { desc = 'Next tab' })
+vim.keymap.set('n', '<M-h>', '<cmd>tabprevious<CR>', { desc = 'Previous tab' })
+vim.keymap.set('n', '<M-ESC>', '<cmd>tabclose<CR>', { desc = 'Close tab' })
+
+-- BUFFER
+vim.keymap.set('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
+vim.keymap.set('n', '<M-r>', '<cmd>bd<CR>', { desc = 'Remove buffer' })
+
+vim.keymap.set('n', '<M-q>', '<cmd>q<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<M-w>', '<cmd>w<CR>', { desc = 'Save buffer' })
+vim.keymap.set('n', '<M-w>q', '<cmd>wq<CR>', { desc = 'Save and quit' })
+vim.keymap.set('n', '<M-S-q>', '<cmd>wqa!<CR>', { desc = 'Force Save and quit all' })
+
+vim.keymap.set('n', '<M-2>', '<cmd>split<CR>', { desc = 'HSplit' })
+vim.keymap.set('n', '<M-3>', '<cmd>vsplit<CR>', { desc = 'VSplit' })
+
+-- RESIZE
+vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize +5<CR>', { desc = 'VResize Left' })
+vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize -5<CR>', { desc = 'VResize Right' })
+vim.keymap.set('n', '<C-Up>', '<cmd>horizontal resize +5<CR>', { desc = 'HResize Up' })
+vim.keymap.set('n', '<C-Down>', '<cmd>horizontal resize -5<CR>', { desc = 'HResize Down' })
+
 --  See `:help lua-guide-autocommands`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
@@ -415,7 +443,6 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         gopls = {},
-        sqls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -500,9 +527,9 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        go = { 'goimports-reviser' },
-        sql = { 'sqlls' },
+        go = { 'goimports-reviser', 'goimports' },
         python = { 'black' },
+        sql = { 'sqlfluff' },
       },
     },
   },
