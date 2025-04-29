@@ -123,7 +123,6 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- TERM
-vim.keymap.set('n', '<M-`>', '<cmd>split | term<CR>', { desc = 'Open terminal' })
 
 -- TABS
 vim.keymap.set('n', '<M-1>', '<cmd>tabnew<CR>', { desc = 'New tab' })
@@ -134,12 +133,11 @@ vim.keymap.set('n', '<M-ESC>', '<cmd>tabclose<CR>', { desc = 'Close tab' })
 -- BUFFER
 vim.keymap.set('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<S-Tab>', '<cmd>bprevious<CR>', { desc = 'Previous buffer' })
-vim.keymap.set('n', '<M-r>', '<cmd>bd<CR>', { desc = 'Remove buffer' })
-
-vim.keymap.set('n', '<M-q>', '<cmd>q<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<M-r>', '<cmd>q<CR>', { desc = 'Close buffer' })
+vim.keymap.set('n', '<M-q>', '<cmd>bd<CR>', { desc = 'Close and delete buffer' })
 vim.keymap.set('n', '<M-w>', '<cmd>w<CR>', { desc = 'Save buffer' })
 vim.keymap.set('n', '<M-w>q', '<cmd>wq<CR>', { desc = 'Save and quit' })
-vim.keymap.set('n', '<M-S-q>', '<cmd>wqa!<CR>', { desc = 'Force Save and quit all' })
+vim.keymap.set('n', '<S-M-q>', '<cmd>wqa!<CR>', { desc = 'Force Save and quit all' })
 
 vim.keymap.set('n', '<M-2>', '<cmd>split<CR>', { desc = 'HSplit' })
 vim.keymap.set('n', '<M-3>', '<cmd>vsplit<CR>', { desc = 'VSplit' })
@@ -173,6 +171,21 @@ vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  -- Toggle Terminal plugin
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup {
+        direction = 'horizontal', -- can be "horizontal", "vertical", "tab", or "float"
+        open_mapping = [[<M-`>]],
+        shade_terminals = true,
+        start_in_insert = true,
+        persist_size = true,
+      }
+    end,
+  },
+
   -- See `:help gitsigns` to understand what the configuration keys do
   {
     'lewis6991/gitsigns.nvim',
